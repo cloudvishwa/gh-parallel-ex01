@@ -1,0 +1,27 @@
+name: Send Email Notification on Failure
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: |
+          echo "Fake test step"
+      - name: Send notification email if failed
+        if: failure()
+        uses: dawidd6/action-send-mail@v4
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: GitHub Actions build failed!
+          to: vishwaawsac@gmail.com
+          from: vishwacloudlab@gmail.com
+          body: |
+            The GitHub Actions workflow failed.
