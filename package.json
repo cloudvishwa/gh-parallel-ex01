@@ -1,12 +1,14 @@
 {
-  "name": "cache-demo",
+  "name": "cross-platform-nodejs-test",
   "version": "1.0.0",
+  "description": "Demonstration Node.js project for cross-platform GitHub Actions matrix testing",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Running tests...\" && exit 0",
-    "build": "echo \"Building project...\" && exit 0"
+    "test": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/results.xml"
   },
-    "dependencies": {
-    "lodash": "^4.17.21"
-    }
-
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^10.0.0",
+    "mocha-junit-reporter": "^2.2.0"
+  }
 }
