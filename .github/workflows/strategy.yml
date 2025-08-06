@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [14, 16, 18]
+        node-version: [18]
 
         # include:
         #   - os: macos-latest
@@ -38,6 +38,15 @@ jobs:
         with:
           name: test-results-${{ matrix.os }}-${{ matrix.node-version }}
           path: test-results/
+
+  approval:
+    needs: test 
+    runs-on: ubuntu-latest
+    environment:
+      name: prod 
+    steps:
+      - run : echo "waiting for manual approval"
+
 
   output:
     needs: test 
